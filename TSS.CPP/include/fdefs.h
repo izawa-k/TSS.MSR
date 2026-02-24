@@ -23,8 +23,10 @@
 
 #ifdef _MSC_VER
 #   define _NORETURN_  __declspec(noreturn)
-#   ifdef _TPMCPPLIB
+#   if defined(_TPMCPPLIB)
 #       define _DLLEXP_ __declspec(dllexport)
+#   elif defined(TSSCPP_STATIC) || defined(_DLLEXP_STATIC) || defined(GPCCLIB_STATIC_RUNTIME) || defined(_MT) /*静的リンク用*/
+#       define _DLLEXP_
 #   else
 #       define _DLLEXP_ __declspec(dllimport)
 #   endif
